@@ -468,6 +468,38 @@
 
         /* Schedule Section */
         .schedule {
+            cursor: default;
+        }
+
+        /* Make schedule items clickable */
+        .schedule-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .schedule-item::after {
+            content: '📱 Sign Up';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: opacity 0.3s;
+        }
+
+        .schedule-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .schedule-item:hover::after {
+            opacity: 1;
+        }
+
+        .schedule {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: #ffffff;
         }
@@ -1007,35 +1039,35 @@
                     <h3 class="day-header">MON / WED / FRI</h3>
                     <h4 class="day-subheader">ПОНЕДЕЛЬНИК / СРЕДА / ПЯТНИЦА</h4>
                     <div class="schedule-classes">
-                        <div class="schedule-item">
+                        <div class="schedule-item" onclick="signUpClass('ALL STYLES 6+', '11:00', 'Понедельник / Среда / Пятница (Mon/Wed/Fri)', 'Жанель')">
                             <div class="time">11:00</div>
                             <div class="class-info">
                                 <div class="class-name">ALL STYLES 6+</div>
                                 <div class="instructor">Жанель</div>
                             </div>
                         </div>
-                        <div class="schedule-item">
+                        <div class="schedule-item" onclick="signUpClass('PRO GROUP', '18:00', 'Понедельник / Среда / Пятница (Mon/Wed/Fri)', 'Данара')">
                             <div class="time">18:00</div>
                             <div class="class-info">
                                 <div class="class-name">PRO GROUP</div>
                                 <div class="instructor">Данара</div>
                             </div>
                         </div>
-                        <div class="schedule-item">
+                        <div class="schedule-item" onclick="signUpClass('HIP-HOP CHOREO 12+ / JAZZ FUNK 12+', '19:00', 'Понедельник / Среда / Пятница (Mon/Wed/Fri)', 'Костя Ан / Данара')">
                             <div class="time">19:00</div>
                             <div class="class-info">
                                 <div class="class-name">HIP-HOP CHOREO 12+<br>JAZZ FUNK 12+</div>
                                 <div class="instructor">Костя Ан / Данара</div>
                             </div>
                         </div>
-                        <div class="schedule-item">
+                        <div class="schedule-item" onclick="signUpClass('ALL STYLES 12+', '20:00', 'Понедельник / Среда / Пятница (Mon/Wed/Fri)', 'Анель')">
                             <div class="time">20:00</div>
                             <div class="class-info">
                                 <div class="class-name">ALL STYLES 12+</div>
                                 <div class="instructor">Анель</div>
                             </div>
                         </div>
-                        <div class="schedule-item">
+                        <div class="schedule-item" onclick="signUpClass('HIGH HEELS 18+', '21:00', 'Понедельник / Среда / Пятница (Mon/Wed/Fri)', 'Анель')">
                             <div class="time">21:00</div>
                             <div class="class-info">
                                 <div class="class-name">HIGH HEELS 18+</div>
@@ -1051,21 +1083,21 @@
                         <h3 class="day-header">TUE / THU / SAT</h3>
                         <h4 class="day-subheader">ВТОРНИК / ЧЕТВЕРГ / СУББОТА</h4>
                         <div class="schedule-classes">
-                            <div class="schedule-item">
+                            <div class="schedule-item" onclick="signUpClass('ALL STYLES 12+', '17:00', 'Вторник / Четверг / Суббота (Tue/Thu/Sat)', 'Алиша')">
                                 <div class="time">17:00</div>
                                 <div class="class-info">
                                     <div class="class-name">ALL STYLES 12+</div>
                                     <div class="instructor">Алиша</div>
                                 </div>
                             </div>
-                            <div class="schedule-item">
+                            <div class="schedule-item" onclick="signUpClass('JAZZ FUNK 12+ / K-POP 6+', '19:00', 'Вторник / Четверг / Суббота (Tue/Thu/Sat)', 'Жанель / Алима')">
                                 <div class="time">19:00</div>
                                 <div class="class-info">
                                     <div class="class-name">JAZZ FUNK 12+<br>K-POP 6+</div>
                                     <div class="instructor">Жанель / Алима</div>
                                 </div>
                             </div>
-                            <div class="schedule-item">
+                            <div class="schedule-item" onclick="signUpClass('GIRLY HOP 12+ / K-POP 14+', '20:00', 'Вторник / Четверг / Суббота (Tue/Thu/Sat)', 'Алина / Марго')">
                                 <div class="time">20:00</div>
                                 <div class="class-info">
                                     <div class="class-name">GIRLY HOP 12+<br>K-POP 14+</div>
@@ -1080,7 +1112,7 @@
                         <h3 class="day-header">SUNDAY</h3>
                         <h4 class="day-subheader">ВОСКРЕСЕНЬЕ</h4>
                         <div class="schedule-classes">
-                            <div class="schedule-item">
+                            <div class="schedule-item" onclick="signUpClass('K-POP 6+', '12:00', 'Воскресенье (Sunday)', 'Костя Ким')">
                                 <div class="time">12:00</div>
                                 <div class="class-info">
                                     <div class="class-name">K-POP 6+</div>
@@ -1312,6 +1344,31 @@
                     }
                 }
             });
+        }
+
+        // WhatsApp Sign Up Function
+        function signUpClass(className, time, days, instructor) {
+            const phone = '77087056811';
+            
+            // Create message in Russian and English
+            const message = `Здравствуйте! 👋
+
+Хочу записаться на занятие:
+📅 Дни: ${days}
+⏰ Время: ${time}
+💃 Класс: ${className}
+👨‍🏫 Преподаватель: ${instructor}
+
+Спасибо!`;
+            
+            // URL encode the message
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodedMessage}&type=phone_number&app_absent=0`;
+            
+            // Open in new tab
+            window.open(whatsappUrl, '_blank');
         }
 
         function toggleMenu() {
